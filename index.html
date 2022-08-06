@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220804224053">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220806100522">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,11 +22,11 @@
 				<div class="header__menu menu">
 					<nav class="menu__body">
 						<ul class="menu__list">
-							<li class="menu__item"><a href="" class="menu__link">Кафе</a></li>
-							<li class="menu__item"><a href="menu.html" class="menu__link">Меню</a></li>
-							<li class="menu__item"><a href="index.html" class="menu__link">Торты на заказ</a></li>
-							<li class="menu__item"><a href="blog.html" class="menu__link">Кулинарные статьи</a></li>
-							<li class="menu__item"><a href="about.html" class="menu__link">Сми о нас</a></li>
+							<li class="menu__item"><a href="../wedding-cakes.html" class="menu__link">Кафе</a></li>
+							<li class="menu__item"><a href="../menu.html" class="menu__link">Меню</a></li>
+							<li class="menu__item"><a href="../index.html" class="menu__link">Торты на заказ</a></li>
+							<li class="menu__item"><a href="../blog.html" class="menu__link">Кулинарные статьи</a></li>
+							<li class="menu__item"><a href="../about.html" class="menu__link">Сми о нас</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -38,130 +38,458 @@
 			</div>
 		</header>
 		<main class="page">
-			<section class="hero hero__order" id="hero">
+
+			<section class="hero hero__main">
 				<div class="hero__container">
-					<div class="hero__content">
-						<div class="hero__data">
-							<h1 class="hero__title">Торты на заказ</h1>
-							<p class="hero__subtitle">Вкусно и по доступным ценам</p>
-							<a href="#" class="button hero__button">Оставить заявку</a>
-						</div>
-						<div class="hero__order-image">
-							<picture><source srcset="img/cases-hero-order.webp" type="image/webp"><img src="img/cases-hero-order.png" alt=""></picture>
+					<div class="hero__wrapper" style="background: url('img/banner/hero-main.png') 0 0 no-repeat; background-position: center;">
+						<div class="hero__content">
+							<h1 class="hero__title _section-title">Онлайн курс - прекрасные маккаруни от нашего кондитера Александры
+								Овешковой</h1>
+							<p class="hero__subtitle">В течение двух дней вы пройдёте полноценную практику и значительно повысите
+								свой уровень!</p>
+							<a href="#" class="button hero__button">Подробнее</a>
 						</div>
 					</div>
 				</div>
 			</section>
-			<section class="cakes" data-aos="fade-up">
-				<div class="cakes__container">
-					<h2 class="cakes__title _section-title">Виды Тортов</h2>
-					<p class="cases__description _section-description">Рекомендуем попробовать торты на заказ от
-						заслуженного
-						кондитера Москвы Александра Круглова</p>
-					<ul class="cakes__list cakes__order-list">
-						<li class="cakes__item cake" data-aos="fade-right" data-aos-offset="500" data-aos-duration="500">
-							<div class="cake__image">
-								<div class="cake__image-ibg"><picture><source srcset="img/cakes-views/wedding.webp" type="image/webp"><img src="img/cakes-views/wedding.png" alt="cake"></picture></div>
+
+			<section class="course" data-aos="fade-up">
+				<div class="course__container">
+					<h2 class="course__title _section-title">Для кого курс</h2>
+					<div class="course__slider swiper">
+						<!-- Двигающееся часть слайдера -->
+						<div class="course__wrapper swiper-wrapper">
+							<!-- Слайд -->
+							<div class="course__slide swiper-slide">
+								<div class="course__image-ibg"><picture><source srcset="img/courses/family.webp" type="image/webp"><img src="img/courses/family.png" alt="image"></picture></div>
+								<div class="course__slide-title">Для всей семьи</div>
 							</div>
-							<div class="cake__content">
-								<div class="cake__title">Свадебные торты</div>
-								<div class="cake__subtitle">От заслуженного кондитера Москвы Александра Круглова</div>
-								<a href="wedding-cakes.html" class="button cake__button">Заказать</a>
+							<div class="course__slide swiper-slide">
+								<div class="course__image-ibg"><picture><source srcset="img/courses/family.webp" type="image/webp"><img src="img/courses/family.png" alt="image"></picture></div>
+								<div class="course__slide-title">Влюбленные</div>
 							</div>
-						</li>
-						<li class="cakes__item cake" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500">
-							<div class="cake__image">
-								<div class="cake__image-ibg"><picture><source srcset="img/cakes-views/kids.webp" type="image/webp"><img src="img/cakes-views/kids.png" alt="cake"></picture></div>
+							<div class="course__slide swiper-slide">
+								<div class="course__image-ibg"><picture><source srcset="img/courses/family.webp" type="image/webp"><img src="img/courses/family.png" alt="image"></picture></div>
+								<div class="course__slide-title">Тимбилдинг</div>
 							</div>
-							<div class="cake__content">
-								<div class="cake__title">Детские торты</div>
-								<div class="cake__subtitle">От заслуженного кондитера Москвы Александра Круглова</div>
-								<a href="#" class="button cake__button">Заказать</a>
+							<div class="course__slide swiper-slide">
+								<div class="course__image-ibg"><picture><source srcset="img/courses/family.webp" type="image/webp"><img src="img/courses/family.png" alt="image"></picture></div>
+								<div class="course__slide-title">Фуд-блогеры</div>
 							</div>
-						</li>
-						<li class="cakes__item cake" data-aos="fade-right" data-aos-offset="500" data-aos-duration="500">
-							<div class="cake__image">
-								<div class="cake__image-ibg"><picture><source srcset="img/cakes-views/happy.webp" type="image/webp"><img src="img/cakes-views/happy.png" alt="cake"></picture></div>
-							</div>
-							<div class="cake__content">
-								<div class="cake__title">Праздничные торты</div>
-								<div class="cake__subtitle">От заслуженного кондитера Москвы Александра Круглова</div>
-								<a href="#" class="button cake__button">Заказать</a>
-							</div>
-						</li>
-						<li class="cakes__item cake" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500">
-							<div class="cake__image">
-								<div class="cake__image-ibg"><picture><source srcset="img/cakes-views/bussiness.webp" type="image/webp"><img src="img/cakes-views/bussiness.png" alt="cake"></picture></div>
-							</div>
-							<div class="cake__content">
-								<div class="cake__title">Корпоративные торты</div>
-								<div class="cake__subtitle">От заслуженного кондитера Москвы Александра Круглова</div>
-								<a href="#" class="button cake__button">Заказать</a>
-							</div>
-						</li>
-					</ul>
+						</div>
+						<!-- Если нужна навигация (влево/вправо) -->
+					</div>
+					<div class="course__actions slider__actions">
+						<button type="button" class="swiper-button-prev"></button>
+						<div class="swiper-pagination course__pagination"></div>
+						<button type="button" class="swiper-button-next"></button>
+					</div>
 				</div>
 			</section>
-			<section class="team" data-aos="fade-up">
-				<div class="team__container">
-					<h2 class="team__title _section-title">Наша команда</h2>
-					<p class="team__description _section-description">В нашем кафе собрана команда профессионалов,
-						которая всегда заботится о своих посетителях, делая ваш отдых комфортным. Мы всегда идём на
-						встречу нашим гостям в любых вопросах и пожеланиях.
-						Добро пожаловать!</p>
-					<ul class="team__items">
-						<li class="team__item">
-							<div class="team__item-img" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500">
+
+			<section class="experts" data-aos="fade-up">
+				<div class="experts__container">
+					<h2 class="experts__title _section-title">Наши звездные эксперты</h2>
+					<ul class="experts__items">
+						<li class="experts__item expert">
+							<div class="expert__image">
 								<picture><source srcset="img/team/team-1.webp" type="image/webp"><img src="img/team/team-1.png" alt=""></picture>
 							</div>
-							<div class="team__item-data" data-aos="fade-right" data-aos-offset="500" data-aos-duration="500">
-								<div class="team__item-title">Александра Овешкова</div>
-								<div class="team__item-skills">
-									<a href="#" class="team__item-skill">
-										<img src="img/icons/instagram.svg" alt="instagram icon">
+							<div class="expert__data">
+								<div class="expert__title">Александра Овешкова</div>
+								<div class="expert__info">
+									<span class="expert__info-item"> <img src="img/icons/instagram.svg" alt="instagram icon">
 										Ведущая живых мастер-классов
-									</a>
-									<a href="#" class="team__item-skill">
-										<img src="img/icons/team.svg" alt="instagram icon">
+									</span>
+									<span class="expert__info-item"> <img src="img/icons/team.svg" alt="instagram icon">
 										Преподаватель в онлайн школе
-									</a>
+									</span>
 								</div>
-								<p class="team__item-description">
-									Многолетний опыт работы с уникальными технологиями приготовления тортов и десертов.
-									Более 500 учеников уже готовят прекрасные троты.
-									Автор статей и рецептов в журнале «Печь», автор книги «Любовь и тарты». Прошла
-									обучение и владеет сертификатами от профессиональных кондитеров с мировой
-									известностью.
-								</p>
+								<ul class="expert__skills-list">
+									<li class="expert__skills-item">Владеет уникальными технологиями приготовления тортов и десертов</li>
+									<li class="expert__skills-item">Более 500 учеников научились готовить прекрасные торты</li>
+									<li class="expert__skills-item">Автор статей и рецептов в журнале “Печь”</li>
+									<li class="expert__skills-item">Автор книги “Любовь и тарты”</li>
+									<li class="expert__skills-item">Владеет сертификатами от профессиональных кондитеров с мировой
+										известностью</li>
+								</ul>
+								<div class="button expert__button">ЗАПИСАТЬСЯ НА КУРС</div>
 							</div>
 						</li>
-						<li class="team__item">
-							<div class="team__item-img" data-aos="fade-left" data-aos-offset="500" data-aos-duration="500">
+						<li class="experts__item expert">
+							<div class="expert__image">
 								<picture><source srcset="img/team/team-2.webp" type="image/webp"><img src="img/team/team-2.png" alt=""></picture>
 							</div>
-							<div class="team__item-data" data-aos="fade-right" data-aos-offset="500" data-aos-duration="500">
-								<div class="team__item-title">Елена Решетняк</div>
-								<div class="team__item-skills">
-									<a href="#" class="team__item-skill">
+							<div class="expert__data">
+								<div class="expert__title">Елена Решетняк</div>
+								<div class="expert__info">
+									<span class="expert__info-item">
 										<img src="img/icons/star.svg" alt="instagram icon">
 										Специалист в кондитерской сфере
-									</a>
-									<a href="#" class="team__item-skill">
+									</span>
+									<span class="expert__info-item">
 										<img src="img/icons/team.svg" alt="instagram icon">
 										Ведущая популярного блога
-									</a>
+									</span>
 								</div>
-								<p class="team__item-description">
-									Елена Решетняк — эксперт по сахарной и вафельной флористике
-									и бисквитным тортам. Разработала авторскую рецептуру сахарней пасты и технологию
-									сброски сухарных цветов, а также собрала более 10.000 цветов для декора десертов и
-									более 1000 её учеников украшают цветами свои торты.
-								</p>
+								<ul class="expert__skills-list">
+									<li class="expert__skills-item">Эксперт по сахарной и вафельной флористике</li>
+									<li class="expert__skills-item">Эксперт по бисквитным тортам</li>
+									<li class="expert__skills-item">Разработала авторскую рецептуру сахарной пасты</li>
+									<li class="expert__skills-item">Разработала технологии сброски сахарных цветов</li>
+									<li class="expert__skills-item">Собрала более 10 000 цветов для декора десертов</li>
+									<li class="expert__skills-item">Более 1000 ее учеников украшают цветами свои торты</li>
+								</ul>
+								<div class="button expert__button">ЗАПИСАТЬСЯ НА КУРС</div>
 							</div>
 						</li>
 					</ul>
 				</div>
 			</section>
+
+			<section class="works" data-aos="fade-up">
+				<div class="works__container">
+					<h2 class="works__title _section-title">Работы нашего эксперта</h2>
+					<div class="works__slider swiper">
+						<div class="works__wrapper swiper-wrapper">
+							<div class="works__slide swiper-slide">
+								<div class="works__image-ibg"><picture><source srcset="img/works/work-1.webp" type="image/webp"><img src="img/works/work-1.png" alt="image"></picture></div>
+							</div>
+							<div class="works__slide swiper-slide">
+								<div class="works__image-ibg"><picture><source srcset="img/works/work-2.webp" type="image/webp"><img src="img/works/work-2.png" alt="image"></picture></div>
+							</div>
+						</div>
+						<div class="slider__actions">
+							<button type="button" class="swiper-button-prev"></button>
+							<div class="works__slider-pagination"></div>
+							<button type="button" class="swiper-button-next"></button>
+						</div>
+					</div>
+					<div class="works__button">
+						<a href="#" class="button">Хочу также</a>
+					</div>
+
+				</div>
+			</section>
+
+			<section class="program" data-aos="fade-up">
+				<div class="program__container">
+					<h2 class="program__title _section-title">Программа курса </h2>
+					<div class="program__subtitle">На курсе мы приготовим:</div>
+					<div class="program__wrapper">
+						<div class="program__card">
+							<div class="program__card-title">Практический курс "Великолепный Тарты" </div>
+							<div class="program__card-subtitle">Группа до 12 человек <br>
+								Продолжительность 2 дня <br>
+								Дата 30-31 июля
+							</div>
+							<div class="program__card-text">
+								<span>Что входит:</span>
+								<ul class="program__card-list">
+									<li>Сертификат об окончании</li>
+									<li>Все десерты, которые Вы приготовите, Вы забираете с собой</li>
+									<li>Весь инвентарь и ингредиенты предоставляет площадка</li>
+									<li>Горячий обед в середине занятия</li>
+								</ul>
+							</div>
+						</div>
+						<div class="program__info">
+							<ol class="program__info-list">
+								<li>
+									<span class="program__list-title">Тарт Бри Голубика</span>
+									<ul class="program__sublist">
+										<li>миндальное сабле</li>
+										<li>франжипан с голубикой</li>
+										<li>Компоте черника-голубика</li>
+										<li>шоколадный ганаш с черникой</li>
+										<li>мусс с бри</li>
+									</ul>
+								</li>
+								<li>
+									<span class="program__list-title">Тарт Мандарин</span>
+									<ul class="program__sublist">
+										<li>апельсиновое сабле</li>
+										<li>хрустящий слой</li>
+										<li>мандариновый ганаш</li>
+										<li>миндальный штрейзель</li>
+										<li>компоте имбирь мандарин</li>
+										<li>взбитый мандариновый ганаш</li>
+										<li>шоколадная апельсиновая глазурь</li>
+										<li>нейтральный гель</li>
+									</ul>
+								</li>
+								<li>
+									<span class="program__list-title">Тарт фисташковый взрыв</span>
+									<ul class="program__sublist">
+										<li>фисташковое сабле</li>
+										<li>фисташковое пралине</li>
+										<li>фисташковый кранч с пралине</li>
+										<li>фисташковая намелака</li>
+										<li>взбитый ганаш с фисташковый пралине</li>
+									</ul>
+								</li>
+							</ol>
+							<a href="#" class="button program__info-button">Подробнее</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="results" id="results" data-aos="fade-up">
+				<div class="results__container">
+					<h2 class="results__title _section-title">Ваши результаты после обучения</h2>
+					<div class="results__wrapper">
+						<div class="results__items results__items--left">
+							<div class="results__item" data-aos="fade-right" data-aos-duration="500" data-aos-anchor-placement="center-bottom">
+								Умеешь готовить десерты разной сложности
+							</div>
+							<div class="results__item" data-aos="fade-right" data-aos-duration="700" data-aos-anchor-placement="center-bottom">
+								Знаешь, как продвигать себя в сфере работы кондитером
+							</div>
+							<div class="results__item" data-aos="fade-right" data-aos-duration="900" data-aos-anchor-placement="center-bottom">
+								Умеешь создавать красивые фото и видео своих работ
+							</div>
+						</div>
+						<div class="results__image" data-aos="zoom-in" data-aos-delay="600">
+							<picture><source srcset="img/results-image.webp" type="image/webp"><img src="img/results-image.png" alt="image"></picture>
+						</div>
+						<div class="results__items results__items--right">
+							<div class="results__item" data-aos="fade-left" data-aos-duration="500" data-aos-anchor-placement="center-bottom">
+								Появится уверенность и желание в своих работах
+							</div>
+							<div class="results__item" data-aos="fade-left" data-aos-duration="700" data-aos-anchor-placement="center-bottom">
+								Знаешь, как готовить сладости без вреда для здоровья
+							</div>
+							<div class="results__item" data-aos="fade-left" data-aos-duration="900" data-aos-anchor-placement="center-bottom">
+								Получишь знания, которые помогут стать успешным кондитером
+							</div>
+						</div>
+					</div>
+					<div class="results__button">
+						<a href="#" class="button results__button-link">Записаться на курс</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="pricing">
+				<div class="pricing__container">
+					<h2 class="pricing__title _section-title">Тарифы и стоимость курса</h2>
+					<div class="pricing__items">
+						<div class="pricing__item" data-aos="fade-up" data-aos-duration="700">
+							<span class="pricing__item-title">"Все сама"</span>
+							<ul class="pricing__item-list">
+								<li>24 видео-урока в записи</li>
+								<li>Теория, история, рецепты</li>
+								<li>Доступ к курсу в течение</li>
+								<li>12 месяцев</li>
+								<li>Форумы и чат с куратором в маленьких группах</li>
+								<li>Теоретический и практические экзамены</li>
+								<li>Сертификат при успешной сдаче экзаменов</li>
+								<li>6 месяцев подписки в Кондитерском Клубе</li>
+								<li>6 дополнительных занятий с Шефом</li>
+							</ul>
+							<div class="pricing__item-price">3 990 Р</div>
+							<a href="#" class="button pricing__item-button">ВЫБРАТЬ ТАРИФ</a>
+						</div>
+						<div class="pricing__item" data-aos="fade-up" data-aos-duration="900">
+							<span class="pricing__item-title">“за руку”</span>
+							<ul class="pricing__item-list">
+								<li>24 видео-урока в записи</li>
+								<li>Теория, история, рецепты</li>
+								<li>Доступ к курсу в течение</li>
+								<li>12 месяцев</li>
+								<li>Форумы и чат с куратором в маленьких группах</li>
+								<li>Теоретический и практические экзамены</li>
+								<li>Сертификат при успешной сдаче экзаменов</li>
+								<li>6 месяцев подписки в Кондитерском Клубе</li>
+								<li>6 дополнительных занятий с Шефом</li>
+							</ul>
+							<div class="pricing__item-price">3 990 Р</div>
+							<a href="#" class="button pricing__item-button">ВЫБРАТЬ ТАРИФ</a>
+						</div>
+						<div class="pricing__item" data-aos="fade-up" data-aos-duration="1200">
+							<span class="pricing__item-title">“с шефом”</span>
+							<ul class="pricing__item-list">
+								<li>24 видео-урока в записи</li>
+								<li>Теория, история, рецепты</li>
+								<li>Доступ к курсу в течение</li>
+								<li>12 месяцев</li>
+								<li>Форумы и чат с куратором в маленьких группах</li>
+								<li>Теоретический и практические экзамены</li>
+								<li>Сертификат при успешной сдаче экзаменов</li>
+								<li>6 месяцев подписки в Кондитерском Клубе</li>
+								<li>6 дополнительных занятий с Шефом</li>
+							</ul>
+							<div class="pricing__item-price">3 990 Р</div>
+							<a href="#" class="button pricing__item-button">ВЫБРАТЬ ТАРИФ</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="reviews" data-aos="fade-up">
+				<div class="reviews__container">
+					<h2 class="reviews__title _section-title">Отзывы</h2>
+					<!-- Оболочка слайдера -->
+					<div class="reviews__slider swiper">
+						<!-- Двигающееся часть слайдера -->
+						<div class="reviews__wrapper swiper-wrapper">
+							<!-- Слайд -->
+							<div class="reviews__slide swiper-slide">
+								<div class="reviews__slide-wrapper">
+									<div class="reviews__item reviews__item-1">
+										<div class="reviews__item-img">
+											<picture><source srcset="img/reviews/review-1.webp" type="image/webp"><img src="img/reviews/review-1.png" alt="image"></picture>
+										</div>
+										<div class="reviews__item-data">
+											<div class="reviews__item-name">Екатерина</div>
+											<div class="reviews__item-text">
+												В полном восторге! Очень понравился базовый курс. Программа курса очень насыщенна.
+											</div>
+										</div>
+									</div>
+									<div class="reviews__item reviews__item-2">
+										<div class="reviews__item-data">
+											<div class="reviews__item-name">Екатерина</div>
+											<div class="reviews__item-text">
+												В полном восторге! Очень понравился базовый курс. Программа курса очень насыщенна.
+											</div>
+										</div>
+										<div class="reviews__item-img">
+											<picture><source srcset="img/reviews/review-1.webp" type="image/webp"><img src="img/reviews/review-1.png" alt="image"></picture>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="reviews__slide swiper-slide">
+								<div class="reviews__slide-wrapper">
+									<div class="reviews__item reviews__item-1">
+										<div class="reviews__item-img">
+											<picture><source srcset="img/reviews/review-1.webp" type="image/webp"><img src="img/reviews/review-1.png" alt="image"></picture>
+										</div>
+										<div class="reviews__item-data">
+											<div class="reviews__item-name">Екатерина</div>
+											<div class="reviews__item-text">
+												В полном восторге! Очень понравился базовый курс. Программа курса очень насыщенна.
+											</div>
+										</div>
+									</div>
+									<div class="reviews__item reviews__item-2">
+										<div class="reviews__item-data">
+											<div class="reviews__item-name">Екатерина</div>
+											<div class="reviews__item-text">
+												В полном восторге! Очень понравился базовый курс. Программа курса очень насыщенна.
+											</div>
+										</div>
+										<div class="reviews__item-img">
+											<picture><source srcset="img/reviews/review-1.webp" type="image/webp"><img src="img/reviews/review-1.png" alt="image"></picture>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Если нужна пагинация -->
+						<div class="slider__actions">
+							<button type="button" class="swiper-button-prev"></button>
+							<div class="swiper-pagination reviews__pagination"></div>
+							<button type="button" class="swiper-button-next"></button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="faq" data-aos="fade-up">
+				<div class="faq__container">
+					<h2 class="faq__title _section-title">Faq</h2>
+					<div data-spollers class="spollers faq__spollers">
+						<div class="spollers__item faq__spollers-item">
+							<button type="button" data-spoller class="spollers__title faq__spollers-title">В какое время нужно
+								обучаться?
+								<svg width="20" height="42" viewBox="0 0 20 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0.5 41.3281L18.5 20.8239L0.499998 1.32812" stroke="black" class="faq__spollers-arrow" />
+								</svg>
+							</button>
+							<div class="spollers__body faq__spollers-content">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								Nesciunt impedit laudantium ullam quaerat quidem velit excepturi a dolore eum praesentium laborum
+								ducimus consequuntur hic reiciendis, ex, cum rerum asperiores harum.</div>
+						</div>
+						<div class="spollers__item faq__spollers-item">
+							<button type="button" data-spoller class="spollers__title faq__spollers-title">Что необходимо иметь для
+								прохождения обучения?
+								<svg width="20" height="42" viewBox="0 0 20 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0.5 41.3281L18.5 20.8239L0.499998 1.32812" stroke="black" class="faq__spollers-arrow" />
+								</svg>
+							</button>
+							<div class="spollers__body faq__spollers-content">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								Nesciunt impedit laudantium ullam quaerat quidem velit excepturi a dolore eum praesentium laborum
+								ducimus consequuntur hic reiciendis, ex, cum rerum asperiores harum.</div>
+						</div>
+						<div class="spollers__item faq__spollers-item">
+							<button type="button" data-spoller class="spollers__title faq__spollers-title">Гарантируете ли вы
+								трудоустройство?
+								<svg width="20" height="42" viewBox="0 0 20 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0.5 41.3281L18.5 20.8239L0.499998 1.32812" stroke="black" class="faq__spollers-arrow" />
+								</svg>
+							</button>
+							<div class="spollers__body faq__spollers-content">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								Nesciunt impedit laudantium ullam quaerat quidem velit excepturi a dolore eum praesentium laborum
+								ducimus consequuntur hic reiciendis, ex, cum rerum asperiores harum.</div>
+						</div>
+						<div class="spollers__item faq__spollers-item">
+							<button type="button" data-spoller class="spollers__title faq__spollers-title">Что нужно знать, чтобы
+								начать обучение на курсе?
+								<svg width="20" height="42" viewBox="0 0 20 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0.5 41.3281L18.5 20.8239L0.499998 1.32812" stroke="black" class="faq__spollers-arrow" />
+								</svg>
+							</button>
+							<div class="spollers__body faq__spollers-content">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+								Nesciunt impedit laudantium ullam quaerat quidem velit excepturi a dolore eum praesentium laborum
+								ducimus consequuntur hic reiciendis, ex, cum rerum asperiores harum.</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="report" data-aos="fade-up">
+				<div class="report__container">
+					<h2 class="report__title _section-title">Фотоотчет по курсу</h2>
+					<!-- Оболочка слайдера -->
+					<div class="report__slider swiper">
+						<!-- Двигающееся часть слайдера -->
+						<div class="report__wrapper swiper-wrapper">
+							<!-- Слайд -->
+							<div class="report__slide swiper-slide">
+								<div class="report__image-ibg"><picture><source srcset="img/report/report-1.webp" type="image/webp"><img src="img/report/report-1.png" alt=""></picture></div>
+							</div>
+							<div class="report__slide swiper-slide">
+								<div class="report__image-ibg"><picture><source srcset="img/report/report-2.webp" type="image/webp"><img src="img/report/report-2.png" alt=""></picture></div>
+							</div>
+							<div class="report__slide swiper-slide">
+								<div class="report__image-ibg"><picture><source srcset="img/report/report-3.webp" type="image/webp"><img src="img/report/report-3.png" alt=""></picture></div>
+							</div>
+						</div>
+						<div class="slider__actions">
+							<button type="button" class="swiper-button-prev"></button>
+							<div class="swiper-pagination report__pagination"></div>
+							<button type="button" class="swiper-button-next"></button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section class="callback" data-aos="fade-up">
+				<div class="callback__container">
+					<h2 class="callback__title _section-title">записаться на курс</h2>
+					<form action="#" class="form callback__form">
+						<div class="form__title">Оставьте заявку и наш менеджер свяжется с вами в течение 5 минут</div>
+						<input autocomplete="off" type="text" data-validate data-required="text" name="form[]" placeholder="Имя" class="input form__input">
+						<input autocomplete="off" type="number" data-validate data-required="tel" name="form[]" placeholder="Телефон" class="input form__input">
+						<input autocomplete="off" type="email" data-validate data-required="email" name="form[]" placeholder="E-mail" class="input form__input">
+						<button type="submit" class="button form__button">Оставить заявку</button>
+					</form>
+				</div>
+			</section>
+
 		</main>
 		<footer class="footer">
 			<div class="footer__container">
@@ -209,7 +537,7 @@
 		</div>
 	</div>
 </div> -->
-	<script src="js/app.min.js?_v=20220804224053"></script>
+	<script src="js/app.min.js?_v=20220806100522"></script>
 </body>
 
 </html>
