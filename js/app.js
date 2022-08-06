@@ -4803,7 +4803,10 @@
         aos.init({
             once: true
         });
-        aos.refresh();
+        let scrollRef = 0;
+        window.addEventListener("scroll", (function() {
+            scrollRef <= 10 ? scrollRef++ : aos.refresh();
+        }));
         window["FLS"] = true;
         isWebp();
         menuInit();
