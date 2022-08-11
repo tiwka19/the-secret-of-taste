@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20220806100522">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220812002736">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,7 @@
 <body>
 	<div class="wrapper">
 		<header class="header" data-scroll="120" data-scroll-show="2000">
-			<div class="header__container-big">
+			<div class="header__container">
 				<a href="#" class="header__logo">
 					<picture><source srcset="img/logo.webp" type="image/webp"><img src="img/logo.png" alt="logo image"></picture>
 				</a>
@@ -38,9 +38,10 @@
 			</div>
 		</header>
 		<main class="page">
+
 			<section class="hero hero__main">
 				<div class="hero__container">
-					<div class="hero__wrapper" style="background: url('img/banner/hero-main.png') 0 0 no-repeat; background-position: center;">
+					<div class="hero__wrapper" style="background: url('img/banner/hero-main.png') 0 0 no-repeat; background-position: center; background-size: cover;">
 						<div class="hero__content">
 							<h1 class="hero__title _section-title">Онлайн курс - прекрасные маккаруни от нашего кондитера Александры
 								Овешковой</h1>
@@ -112,7 +113,7 @@
 									<li class="expert__skills-item">Владеет сертификатами от профессиональных кондитеров с мировой
 										известностью</li>
 								</ul>
-								<div class="button expert__button">ЗАПИСАТЬСЯ НА КУРС</div>
+								<a href="#" class="button expert__button">ЗАПИСАТЬСЯ НА КУРС</a>
 							</div>
 						</li>
 						<li class="experts__item expert">
@@ -139,7 +140,7 @@
 									<li class="expert__skills-item">Собрала более 10 000 цветов для декора десертов</li>
 									<li class="expert__skills-item">Более 1000 ее учеников украшают цветами свои торты</li>
 								</ul>
-								<div class="button expert__button">ЗАПИСАТЬСЯ НА КУРС</div>
+								<a href="#" class="button expert__button">ЗАПИСАТЬСЯ НА КУРС</a>
 							</div>
 						</li>
 					</ul>
@@ -484,7 +485,10 @@
 						<input autocomplete="off" type="text" data-validate data-required="text" name="form[]" placeholder="Имя" class="input form__input">
 						<input autocomplete="off" type="number" data-validate data-required="tel" name="form[]" placeholder="Телефон" class="input form__input">
 						<input autocomplete="off" type="email" data-validate data-required="email" name="form[]" placeholder="E-mail" class="input form__input">
-						<button type="submit" class="button form__button">Оставить заявку</button>
+						<div class="form__button-wrapper">
+							<button type="submit" class="button form__button">Оставить заявку</button>
+						</div>
+
 					</form>
 				</div>
 			</section>
@@ -526,7 +530,17 @@
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20220806100522"></script>
+	<!-- <div id="popup" aria-hidden="true" class="popup">
+	<div class="popup__wrapper">
+		<div class="popup__content">
+			<button data-close type="button" class="popup__close">Закрыть</button>
+			<div class="popup__text">
+				Text
+			</div>
+		</div>
+	</div>
+</div> -->
+	<script src="js/app.min.js?_v=20220812002736"></script>
 </body>
 
 </html>

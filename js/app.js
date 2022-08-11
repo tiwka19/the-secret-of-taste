@@ -3935,7 +3935,7 @@
         }));
         core_Swiper.use([ Resize, Observer ]);
         const core = core_Swiper;
-        function create_element_if_not_defined_createElementIfNotDefined(swiper, originalParams, params, checkProps) {
+        function createElementIfNotDefined(swiper, originalParams, params, checkProps) {
             const document = ssr_window_esm_getDocument();
             if (swiper.params.createElements) Object.keys(checkProps).forEach((key => {
                 if (!params[key] && true === params.auto) {
@@ -4006,7 +4006,7 @@
             }
             function init() {
                 const params = swiper.params.navigation;
-                swiper.params.navigation = create_element_if_not_defined_createElementIfNotDefined(swiper, swiper.originalParams.navigation, swiper.params.navigation, {
+                swiper.params.navigation = createElementIfNotDefined(swiper, swiper.originalParams.navigation, swiper.params.navigation, {
                     nextEl: "swiper-button-next",
                     prevEl: "swiper-button-prev"
                 });
@@ -4245,7 +4245,7 @@
                 if ("custom" !== params.type) emit("paginationRender", swiper.pagination.$el[0]);
             }
             function init() {
-                swiper.params.pagination = create_element_if_not_defined_createElementIfNotDefined(swiper, swiper.originalParams.pagination, swiper.params.pagination, {
+                swiper.params.pagination = createElementIfNotDefined(swiper, swiper.originalParams.pagination, swiper.params.pagination, {
                     el: "swiper-pagination"
                 });
                 const params = swiper.params.pagination;
@@ -4352,6 +4352,259 @@
                 disable,
                 render,
                 update,
+                init,
+                destroy
+            });
+        }
+        function Scrollbar(_ref) {
+            let {swiper, extendParams, on, emit} = _ref;
+            const document = ssr_window_esm_getDocument();
+            let isTouched = false;
+            let timeout = null;
+            let dragTimeout = null;
+            let dragStartPos;
+            let dragSize;
+            let trackSize;
+            let divider;
+            extendParams({
+                scrollbar: {
+                    el: null,
+                    dragSize: "auto",
+                    hide: false,
+                    draggable: false,
+                    snapOnRelease: true,
+                    lockClass: "swiper-scrollbar-lock",
+                    dragClass: "swiper-scrollbar-drag",
+                    scrollbarDisabledClass: "swiper-scrollbar-disabled",
+                    horizontalClass: `swiper-scrollbar-horizontal`,
+                    verticalClass: `swiper-scrollbar-vertical`
+                }
+            });
+            swiper.scrollbar = {
+                el: null,
+                dragEl: null,
+                $el: null,
+                $dragEl: null
+            };
+            function setTranslate() {
+                if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) return;
+                const {scrollbar, rtlTranslate: rtl, progress} = swiper;
+                const {$dragEl, $el} = scrollbar;
+                const params = swiper.params.scrollbar;
+                let newSize = dragSize;
+                let newPos = (trackSize - dragSize) * progress;
+                if (rtl) {
+                    newPos = -newPos;
+                    if (newPos > 0) {
+                        newSize = dragSize - newPos;
+                        newPos = 0;
+                    } else if (-newPos + dragSize > trackSize) newSize = trackSize + newPos;
+                } else if (newPos < 0) {
+                    newSize = dragSize + newPos;
+                    newPos = 0;
+                } else if (newPos + dragSize > trackSize) newSize = trackSize - newPos;
+                if (swiper.isHorizontal()) {
+                    $dragEl.transform(`translate3d(${newPos}px, 0, 0)`);
+                    $dragEl[0].style.width = `${newSize}px`;
+                } else {
+                    $dragEl.transform(`translate3d(0px, ${newPos}px, 0)`);
+                    $dragEl[0].style.height = `${newSize}px`;
+                }
+                if (params.hide) {
+                    clearTimeout(timeout);
+                    $el[0].style.opacity = 1;
+                    timeout = setTimeout((() => {
+                        $el[0].style.opacity = 0;
+                        $el.transition(400);
+                    }), 1e3);
+                }
+            }
+            function setTransition(duration) {
+                if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) return;
+                swiper.scrollbar.$dragEl.transition(duration);
+            }
+            function updateSize() {
+                if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) return;
+                const {scrollbar} = swiper;
+                const {$dragEl, $el} = scrollbar;
+                $dragEl[0].style.width = "";
+                $dragEl[0].style.height = "";
+                trackSize = swiper.isHorizontal() ? $el[0].offsetWidth : $el[0].offsetHeight;
+                divider = swiper.size / (swiper.virtualSize + swiper.params.slidesOffsetBefore - (swiper.params.centeredSlides ? swiper.snapGrid[0] : 0));
+                if ("auto" === swiper.params.scrollbar.dragSize) dragSize = trackSize * divider; else dragSize = parseInt(swiper.params.scrollbar.dragSize, 10);
+                if (swiper.isHorizontal()) $dragEl[0].style.width = `${dragSize}px`; else $dragEl[0].style.height = `${dragSize}px`;
+                if (divider >= 1) $el[0].style.display = "none"; else $el[0].style.display = "";
+                if (swiper.params.scrollbar.hide) $el[0].style.opacity = 0;
+                if (swiper.params.watchOverflow && swiper.enabled) scrollbar.$el[swiper.isLocked ? "addClass" : "removeClass"](swiper.params.scrollbar.lockClass);
+            }
+            function getPointerPosition(e) {
+                if (swiper.isHorizontal()) return "touchstart" === e.type || "touchmove" === e.type ? e.targetTouches[0].clientX : e.clientX;
+                return "touchstart" === e.type || "touchmove" === e.type ? e.targetTouches[0].clientY : e.clientY;
+            }
+            function setDragPosition(e) {
+                const {scrollbar, rtlTranslate: rtl} = swiper;
+                const {$el} = scrollbar;
+                let positionRatio;
+                positionRatio = (getPointerPosition(e) - $el.offset()[swiper.isHorizontal() ? "left" : "top"] - (null !== dragStartPos ? dragStartPos : dragSize / 2)) / (trackSize - dragSize);
+                positionRatio = Math.max(Math.min(positionRatio, 1), 0);
+                if (rtl) positionRatio = 1 - positionRatio;
+                const position = swiper.minTranslate() + (swiper.maxTranslate() - swiper.minTranslate()) * positionRatio;
+                swiper.updateProgress(position);
+                swiper.setTranslate(position);
+                swiper.updateActiveIndex();
+                swiper.updateSlidesClasses();
+            }
+            function onDragStart(e) {
+                const params = swiper.params.scrollbar;
+                const {scrollbar, $wrapperEl} = swiper;
+                const {$el, $dragEl} = scrollbar;
+                isTouched = true;
+                dragStartPos = e.target === $dragEl[0] || e.target === $dragEl ? getPointerPosition(e) - e.target.getBoundingClientRect()[swiper.isHorizontal() ? "left" : "top"] : null;
+                e.preventDefault();
+                e.stopPropagation();
+                $wrapperEl.transition(100);
+                $dragEl.transition(100);
+                setDragPosition(e);
+                clearTimeout(dragTimeout);
+                $el.transition(0);
+                if (params.hide) $el.css("opacity", 1);
+                if (swiper.params.cssMode) swiper.$wrapperEl.css("scroll-snap-type", "none");
+                emit("scrollbarDragStart", e);
+            }
+            function onDragMove(e) {
+                const {scrollbar, $wrapperEl} = swiper;
+                const {$el, $dragEl} = scrollbar;
+                if (!isTouched) return;
+                if (e.preventDefault) e.preventDefault(); else e.returnValue = false;
+                setDragPosition(e);
+                $wrapperEl.transition(0);
+                $el.transition(0);
+                $dragEl.transition(0);
+                emit("scrollbarDragMove", e);
+            }
+            function onDragEnd(e) {
+                const params = swiper.params.scrollbar;
+                const {scrollbar, $wrapperEl} = swiper;
+                const {$el} = scrollbar;
+                if (!isTouched) return;
+                isTouched = false;
+                if (swiper.params.cssMode) {
+                    swiper.$wrapperEl.css("scroll-snap-type", "");
+                    $wrapperEl.transition("");
+                }
+                if (params.hide) {
+                    clearTimeout(dragTimeout);
+                    dragTimeout = utils_nextTick((() => {
+                        $el.css("opacity", 0);
+                        $el.transition(400);
+                    }), 1e3);
+                }
+                emit("scrollbarDragEnd", e);
+                if (params.snapOnRelease) swiper.slideToClosest();
+            }
+            function events(method) {
+                const {scrollbar, touchEventsTouch, touchEventsDesktop, params, support} = swiper;
+                const $el = scrollbar.$el;
+                if (!$el) return;
+                const target = $el[0];
+                const activeListener = support.passiveListener && params.passiveListeners ? {
+                    passive: false,
+                    capture: false
+                } : false;
+                const passiveListener = support.passiveListener && params.passiveListeners ? {
+                    passive: true,
+                    capture: false
+                } : false;
+                if (!target) return;
+                const eventMethod = "on" === method ? "addEventListener" : "removeEventListener";
+                if (!support.touch) {
+                    target[eventMethod](touchEventsDesktop.start, onDragStart, activeListener);
+                    document[eventMethod](touchEventsDesktop.move, onDragMove, activeListener);
+                    document[eventMethod](touchEventsDesktop.end, onDragEnd, passiveListener);
+                } else {
+                    target[eventMethod](touchEventsTouch.start, onDragStart, activeListener);
+                    target[eventMethod](touchEventsTouch.move, onDragMove, activeListener);
+                    target[eventMethod](touchEventsTouch.end, onDragEnd, passiveListener);
+                }
+            }
+            function enableDraggable() {
+                if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) return;
+                events("on");
+            }
+            function disableDraggable() {
+                if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) return;
+                events("off");
+            }
+            function init() {
+                const {scrollbar, $el: $swiperEl} = swiper;
+                swiper.params.scrollbar = createElementIfNotDefined(swiper, swiper.originalParams.scrollbar, swiper.params.scrollbar, {
+                    el: "swiper-scrollbar"
+                });
+                const params = swiper.params.scrollbar;
+                if (!params.el) return;
+                let $el = dom(params.el);
+                if (swiper.params.uniqueNavElements && "string" === typeof params.el && $el.length > 1 && 1 === $swiperEl.find(params.el).length) $el = $swiperEl.find(params.el);
+                $el.addClass(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass);
+                let $dragEl = $el.find(`.${swiper.params.scrollbar.dragClass}`);
+                if (0 === $dragEl.length) {
+                    $dragEl = dom(`<div class="${swiper.params.scrollbar.dragClass}"></div>`);
+                    $el.append($dragEl);
+                }
+                Object.assign(scrollbar, {
+                    $el,
+                    el: $el[0],
+                    $dragEl,
+                    dragEl: $dragEl[0]
+                });
+                if (params.draggable) enableDraggable();
+                if ($el) $el[swiper.enabled ? "removeClass" : "addClass"](swiper.params.scrollbar.lockClass);
+            }
+            function destroy() {
+                const params = swiper.params.scrollbar;
+                const $el = swiper.scrollbar.$el;
+                if ($el) $el.removeClass(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass);
+                disableDraggable();
+            }
+            on("init", (() => {
+                if (false === swiper.params.scrollbar.enabled) disable(); else {
+                    init();
+                    updateSize();
+                    setTranslate();
+                }
+            }));
+            on("update resize observerUpdate lock unlock", (() => {
+                updateSize();
+            }));
+            on("setTranslate", (() => {
+                setTranslate();
+            }));
+            on("setTransition", ((_s, duration) => {
+                setTransition(duration);
+            }));
+            on("enable disable", (() => {
+                const {$el} = swiper.scrollbar;
+                if ($el) $el[swiper.enabled ? "removeClass" : "addClass"](swiper.params.scrollbar.lockClass);
+            }));
+            on("destroy", (() => {
+                destroy();
+            }));
+            const enable = () => {
+                swiper.$el.removeClass(swiper.params.scrollbar.scrollbarDisabledClass);
+                if (swiper.scrollbar.$el) swiper.scrollbar.$el.removeClass(swiper.params.scrollbar.scrollbarDisabledClass);
+                init();
+                updateSize();
+                setTranslate();
+            };
+            const disable = () => {
+                swiper.$el.addClass(swiper.params.scrollbar.scrollbarDisabledClass);
+                if (swiper.scrollbar.$el) swiper.scrollbar.$el.addClass(swiper.params.scrollbar.scrollbarDisabledClass);
+                destroy();
+            };
+            Object.assign(swiper.scrollbar, {
+                enable,
+                disable,
+                updateSize,
+                setTranslate,
                 init,
                 destroy
             });
@@ -4518,7 +4771,6 @@
                 modules: [ Navigation, Pagination, Autoplay ],
                 observer: true,
                 observeParents: true,
-                slidesPerView: 2,
                 spaceBetween: 30,
                 autoHeight: true,
                 speed: 800,
@@ -4626,6 +4878,71 @@
                 },
                 on: {}
             });
+            if (document.querySelector(".interier__slider")) new core(".interier__slider", {
+                modules: [ Navigation, Pagination, Autoplay ],
+                slidesPerView: 2,
+                spaceBetween: 30,
+                speed: 800,
+                loop: true,
+                autoplay: {
+                    delay: 3e3
+                },
+                pagination: {
+                    el: ".interier__pagination",
+                    type: "fraction",
+                    clickable: true
+                },
+                navigation: {
+                    prevEl: ".swiper-button-prev",
+                    nextEl: ".swiper-button-next"
+                },
+                breakpoints: {
+                    320: {
+                        slidesPerView: 1,
+                        autoHeight: true
+                    },
+                    768: {
+                        slidesPerView: 2
+                    }
+                },
+                on: {}
+            });
+            if (document.querySelector(".team__slider")) new core(".team__slider", {
+                modules: [ Autoplay, Scrollbar ],
+                slidesPerView: "auto",
+                spaceBetween: 30,
+                autoplay: {
+                    enabled: true,
+                    delay: 1
+                },
+                scrollbar: {
+                    el: ".swiper-scrollbar",
+                    draggable: true
+                },
+                breakpoints: {
+                    380: {
+                        slidesPerView: 1,
+                        autoHeight: true,
+                        autoplay: {
+                            enabled: false
+                        }
+                    },
+                    450: {
+                        slidesPerView: 2
+                    },
+                    992: {
+                        slidesPerView: 3,
+                        loop: true,
+                        scrollbar: false,
+                        speed: 2e4
+                    },
+                    1024: {
+                        slidesPerView: 4,
+                        speed: 2e4
+                    }
+                },
+                on: {}
+            });
         }
         window.addEventListener("load", (function(e) {
             initSliders();
@@ -4668,32 +4985,6 @@
                 if (document.querySelector(`#${getHash()}`)) goToHash = `#${getHash()}`; else if (document.querySelector(`.${getHash()}`)) goToHash = `.${getHash()}`;
                 goToHash ? gotoBlock(goToHash, true, 500, 20) : null;
             }
-        }
-        function headerScroll() {
-            addWindowScrollEvent = true;
-            const header = document.querySelector("header.header");
-            const headerShow = header.hasAttribute("data-scroll-show");
-            const headerShowTimer = header.dataset.scrollShow ? header.dataset.scrollShow : 500;
-            const startPoint = header.dataset.scroll ? header.dataset.scroll : 1;
-            let scrollDirection = 0;
-            let timer;
-            document.addEventListener("windowScroll", (function(e) {
-                const scrollTop = window.scrollY;
-                clearTimeout(timer);
-                if (scrollTop >= startPoint) {
-                    !header.classList.contains("_header-scroll") ? header.classList.add("_header-scroll") : null;
-                    if (headerShow) {
-                        if (scrollTop > scrollDirection) header.classList.contains("_header-show") ? header.classList.remove("_header-show") : null; else !header.classList.contains("_header-show") ? header.classList.add("_header-show") : null;
-                        timer = setTimeout((() => {
-                            !header.classList.contains("_header-show") ? header.classList.add("_header-show") : null;
-                        }), headerShowTimer);
-                    }
-                } else {
-                    header.classList.contains("_header-scroll") ? header.classList.remove("_header-scroll") : null;
-                    if (headerShow) header.classList.contains("_header-show") ? header.classList.remove("_header-show") : null;
-                }
-                scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
-            }));
         }
         setTimeout((() => {
             if (addWindowScrollEvent) {
@@ -4807,6 +5098,22 @@
         window.addEventListener("scroll", (function() {
             scrollRef <= 10 ? scrollRef++ : aos.refresh();
         }));
+        const dropdown = () => {
+            document.addEventListener("click", (e => {
+                const isDropdownButton = e.target.matches("[data-dropdown-button]");
+                if (!isDropdownButton && null != e.target.closest("[data-dropdown]")) return;
+                let currentDropdown;
+                if (isDropdownButton) {
+                    currentDropdown = e.target.closest("[data-dropdown]");
+                    currentDropdown.classList.toggle("active");
+                }
+                document.querySelectorAll("[data-dropdown].active").forEach((dropdown => {
+                    if (dropdown === currentDropdown) return;
+                    dropdown.classList.remove("active");
+                }));
+            }));
+        };
+        dropdown();
         window["FLS"] = true;
         isWebp();
         menuInit();
@@ -4817,6 +5124,5 @@
         });
         formSubmit();
         pageNavigation();
-        headerScroll();
     })();
 })();
